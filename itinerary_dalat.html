@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuyến Đi Đà Lạt — Lịch Trình 2026</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2d6a4f;
+            /* Pine Forest Green */
+            --secondary: #52b788;
+            /* Fresh Leaf Green */
+            --accent: #1b4332;
+            /* Deep Woodland */
+            --bg-page: #f0f7f4;
+            /* Misty Morning White */
+            --text-main: #1a1c1a;
+            --glass-bg: #ffffff;
+            --glass-border: #b7e4c7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            height: 60vh;
+            background: linear-gradient(to bottom, rgba(240, 247, 244, 0.2), var(--bg-page)),
+                linear-gradient(135deg, #d8f3dc 0%, #b7e4c7 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            animation: fadeIn 1.5s ease-out;
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 5px 15px rgba(45, 106, 79, 0.1);
+            z-index: 2;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.8;
+            max-width: 600px;
+            z-index: 2;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, transparent, var(--bg-page));
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        main {
+            max-width: 900px;
+            margin: -100px auto 100px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .day-section {
+            margin-bottom: 4rem;
+        }
+
+        .day-header {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--primary);
+        }
+
+        .day-header::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: linear-gradient(to right, var(--primary), transparent);
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: slideIn 0.8s ease-out backwards;
+            box-shadow: 0 4px 15px rgba(45, 106, 79, 0.05);
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px) translateY(-5px);
+            background: rgba(255, 255, 255, 0.9);
+            border-color: var(--primary);
+            box-shadow: 0 15px 35px rgba(45, 106, 79, 0.1);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -41px;
+            top: 25px;
+            width: 20px;
+            height: 20px;
+            background: var(--bg-page);
+            border: 3px solid var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        .highlight-food {
+            color: #e67e22;
+            /* Vibrant Orange */
+            font-weight: 700;
+            text-shadow: 0 0 1px rgba(230, 126, 34, 0.2);
+        }
+
+        .highlight-place {
+            color: #0077b6;
+            /* Vibrant Ocean Blue */
+            font-weight: 700;
+            text-shadow: 0 0 1px rgba(0, 119, 182, 0.2);
+        }
+
+        .time {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .activity-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            fill: var(--accent);
+        }
+
+        .details {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            font-weight: 400;
+        }
+
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            header {
+                height: 50vh;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Dalat Serenity</h1>
+        <p class="subtitle">Hành trình tìm về cao nguyên sương mù — Kỷ niệm 30/4 rực rỡ</p>
+    </header>
+
+    <main>
+        <!-- THỨ 4 - 29/04 -->
+        <div class="day-section">
+            <h2 class="day-header">Thứ 4, 29 Tháng 4</h2>
+            <div class="timeline">
+
+                <div class="timeline-item" style="animation-delay: 0.1s;">
+                    <span class="time">21:30</span>
+                    <h3 class="activity-title">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path
+                                d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.41,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.59,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
+                        </svg>
+                        Tập trung tại nhà Mint
+                    </h3>
+                    <p class="details">Gặp mặt mọi người, kiểm tra hành lý lần cuối trước khi khởi hành.</p>
+
+                </div>
+
+                <div class="timeline-item" style="animation-delay: 0.3s;">
+                    <span class="time">21:45</span>
+                    <h3 class="activity-title">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path
+                                d="M18.1,4.8C18,4.3 17.6,4 17.1,4H13V2H11V4H6.9C6.4,4 6,4.3 5.9,4.8L4.3,16H20L18.4,4.8L18.1,4.8M17,11V13H7V11H17M17,7V9H7V7H17M7,15V17H17V15H7Z" />
+                        </svg>
+                        Di chuyển ra trạm xe
+                    </h3>
+                    <p class="details">Di chuyển qua trạm xe ở Ngã tư Thủ Đức.</p>
+                    <p class="details" style="font-size: 0.85rem; margin-top: 5px; opacity: 0.7;">📍 Địa chỉ: 740a Song
+                        Hành Xa Lộ Hà Nội</p>
+                </div>
+
+                <div class="timeline-item" style="animation-delay: 0.5s;">
+                    <span class="time">22:30</span>
+                    <h3 class="activity-title">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path
+                                d="M18,11V13H15V11H18M18,15V17H15V15H18M18,7V9H15V7H18M12,7V9H9V7H12M12,11V13H9V11H12M12,15V17H9V15H12M20,4H4C2.9,4 2,4.9 2,6V18C2,19.1 2.9,20 4,20H20C21.1,20 22,19.1 22,18V6C22,4.9 21.1,4 20,4M20,18H4V6H20V18Z" />
+                        </svg>
+                        Lên xe — Rời phố thị
+                    </h3>
+                    <p class="details">Ổn định chỗ ngồi, ngủ một giấc thật ngon để sáng mai thức dậy ở vùng đất sương
+                        mù.</p>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- THỨ 5 - 30/04 -->
+        <div class="day-section">
+            <h2 class="day-header">Thứ 5, 30 Tháng 4</h2>
+            <div class="timeline">
+
+                <div class="timeline-item" style="animation-delay: 0.1s;">
+                    <span class="time">06:00</span>
+                    <h3 class="activity-title">Chào Đà Lạt!</h3>
+                    <p class="details">Dự kiến xe cập bến. Hít hà không khí se lạnh đặc trưng của thành phố ngàn hoa.
+                    </p>
+
+                </div>
+
+                <div class="timeline-item" style="animation-delay: 0.2s;">
+                    <span class="time">06:30</span>
+                    <h3 class="activity-title">Check-in Khách Sạn</h3>
+                    <p class="details">Đến khách sạn, gửi vali để bắt đầu hành trình khám phá mà không vướng bận.</p>
+                </div>
+
+                <div class="timeline-item" style="animation-delay: 0.3s;">
+                    <span class="time">07:00 — 08:00</span>
+                    <h3 class="activity-title">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path
+                                d="M11,9H9V2H7V9H5V2H3V9C3,11.12 4.66,12.84 6.75,12.97V22H9.25V12.97C11.34,12.84 13,11.12 13,9V2H11V9Z" />
+                        </svg>
+                        Bữa Sáng: <span class="highlight-food">Bánh Mì Xíu Mại</span>
+                    </h3>
+                    <p class="details">Món điểm tâm nóng hổi với nước lèo đậm đà.</p>
+                    <p class="details" style="font-size: 0.85rem; margin-top: 5px; opacity: 0.7;">📍 Link Maps: <a
+                            href="https://maps.app.goo.gl/TT26UbsGDXbpyd4H9" target="_blank"
+                            style="color: inherit; text-decoration: underline;">Xem vị trí</a></p>
+
+                </div>
+
+                <div class="timeline-item" style="animation-delay: 0.4s;">
+                    <span class="time">08:00 — 08:20</span>
+                    <h3 class="activity-title">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z" />
+                        </svg>
+                        Khám phá <span class="highlight-place">Ga Đà Lạt</span>
+                    </h3>
+                    <p class="details">Tham quan kiến trúc đường sắt Đông Dương cổ kính nhất Việt Nam.</p>
+
+                </div>
+
+                <div class="timeline-item" style="animation-delay: 0.5s;">
+                    <span class="time">08:20 — 08:40</span>
+                    <h3 class="activity-title">
+                        Di chuyển qua <span class="highlight-place">Chùa Linh Ứng</span>
+                    </h3>
+                    <p class="details">Hành trình chiêm bái các ngôi chùa thanh tịnh tại Đà Lạt.</p>
+
+                </div>
+
+                <div class="timeline-item" style="animation-delay: 0.6s;">
+                    <span class="time">08:40 — 09:10</span>
+                    <h3 class="activity-title">
+                        Tham quan <span class="highlight-place">Chùa Linh Ứng</span>
+                    </h3>
+                    <p class="details">Chiêm ngưỡng kiến trúc chùa và tận hưởng không gian yên bình.</p>
+
+                </div>
+
+                <div class="timeline-item" style="animation-delay: 0.7s;">
+                    <span class="time">09:30 — 11:30</span>
+                    <h3 class="activity-title">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path
+                                d="M2,21H20V19H2M20,8H18V5H20M20,3H4V13A4,4 0 0,0 8,17H14A4,4 0 0,0 18,13V10H20A2,2 0 0,0 22,8V5A2,2 0 0,0 20,3Z" />
+                        </svg>
+                        Cafe Chill: <span class="highlight-place">Tiệm Cà Phê Nắng Thuỷ Tinh</span>
+                    </h3>
+                    <p class="details">Thưởng thức cafe trong không gian ấm cúng, decor mang phong cách hoài cổ với view
+                        rừng thông tuyệt đẹp.</p>
+                    <p class="details" style="font-size: 0.85rem; margin-top: 5px; opacity: 0.7;">📍 Link Maps: <a
+                            href="https://maps.app.goo.gl/2ZGxajMTi9oT4dEL6" target="_blank"
+                            style="color: inherit; text-decoration: underline;">Xem vị trí</a></p>
+                </div>
+
+                <div class="timeline-item" style="animation-delay: 0.8s;">
+                    <span class="time">12:00 — 13:00</span>
+                    <h3 class="activity-title">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path
+                                d="M11,9H9V2H7V9H5V2H3V9C3,11.12 4.66,12.84 6.75,12.97V22H9.25V12.97C11.34,12.84 13,11.12 13,9V2H11V9Z" />
+                        </svg>
+                        Bữa Trưa: <span class="highlight-food">Nem Nướng</span>
+                    </h3>
+                    <p class="details">Thưởng thức đặc sản Nem nướng với hai lựa chọn nổi tiếng.</p>
+                    <div style="margin-top: 10px; font-size: 0.9rem;">
+                        <p>📍 <strong>Primary:</strong> <a href="https://maps.app.goo.gl/L7XwVN7Y6L3bo4Ti7"
+                                target="_blank" style="color: #2d6a4f; text-decoration: underline;">Nem Nướng Phượng</a>
+                        </p>
+                        <p style="margin-top: 5px; opacity: 0.8;">📍 <strong>Backup:</strong> <a
+                                href="https://maps.app.goo.gl/crCPArWBaxG8jkP18" target="_blank"
+                                style="color: #666; text-decoration: underline;">Nem Nướng Bà Hùng</a></p>
+                    </div>
+
+                </div>
+
+                <div class="timeline-item" style="animation-delay: 0.9s;">
+                    <span class="time">13:00 — 14:00</span>
+                    <h3 class="activity-title">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path
+                                d="M11,18H13V16H11V18M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M11,14H13V10H11V14Z" />
+                        </svg>
+                        Shopping tại <span class="highlight-place">Siêu thị Go! Đà Lạt</span>
+                    </h3>
+                    <p class="details">Ghé siêu thị tại Quảng trường Lâm Viên để mua sắm đồ dùng và quà lưu niệm.</p>
+
+                </div>
+
+                <div class="timeline-item" style="animation-delay: 1.0s;">
+                    <span class="time">14:00 — 16:00</span>
+                    <h3 class="activity-title">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M19,7H11V1H3V7H1V23H23V7H19M5,3H9V7H5V3M3,21V9H9V21H3M11,21V9H21V21H11Z" />
+                        </svg>
+                        Check-in & Nghỉ ngơi
+                    </h3>
+                    <p class="details">Về khách sạn nhận phòng, sắp xếp đồ đạc và nghỉ ngơi hồi sức.</p>
+                </div>
+
+                <!-- AFTERNOON CHOICE IF EARLY CHECK-IN -->
+                <div class="timeline-item"
+                    style="animation-delay: 1.1s; border-left: 3px dashed #bc6c25; background: rgba(188,108,37,0.03);">
+                    <span class="time">15:45 — 17:30</span>
+                    <h3 class="activity-title" style="color: #bc6c25;">
+                        <svg class="icon" viewBox="0 0 24 24" style="fill: #bc6c25;">
+                            <path d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z" />
+                        </svg>
+                        Lựa Chọn Buổi Chiều (Tùy nhận phòng)
+                    </h3>
+                    <div style="display: flex; gap: 15px; margin-top: 10px; flex-wrap: wrap;">
+                        <div
+                            style="flex: 1; min-width: 250px; padding: 12px; border-left: 3px solid #bc6c25; background: #fff; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                            <strong style="color: #bc6c25;">Option A: Đường Hầm Điêu Khắc</strong>
+                            <p style="font-size: 0.9rem; margin-top: 5px;">Thích hợp nếu nhận phòng sớm lúc 13h. Nên
+                                xuất phát từ 15h45 để kịp tham quan trước khi đóng cửa.</p>
+                        </div>
+                        <div
+                            style="flex: 1; min-width: 250px; padding: 12px; border-left: 3px solid #e76f51; background: #fff; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
+                            <strong style="color: #e76f51;">Option B: Hái dâu tại vườn</strong>
+                            <p style="font-size: 0.9rem; margin-top: 5px;">Ưu tiên nếu nhận phòng trễ hoặc muốn đi gần
+                                hơn. Nên hái trước 17h15 để còn đủ ánh sáng chụp hình.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item" style="animation-delay: 1.3s;">
+                    <span class="time">18:00 — 19:30</span>
+                    <h3 class="activity-title">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path
+                                d="M11,9H9V2H7V9H5V2H3V9C3,11.12 4.66,12.84 6.75,12.97V22H9.25V12.97C11.34,12.84 13,11.12 13,9V2H11V9Z" />
+                        </svg>
+                        Bữa tối: <span class="highlight-food">Quán Nướng Chill in Dalat</span>
+                    </h3>
+                    <p class="details">Thưởng thức đồ nướng trong không gian chill tại Đà Lạt.</p>
+                    <p class="details" style="font-size: 0.85rem; margin-top: 5px; opacity: 0.7;">📍 Hẻm 1 Đường Đặng
+                        Thái Thân, P.3, Đà Lạt</p>
+
+                </div>
+
+                <div class="timeline-item" style="animation-delay: 1.4s;">
+                    <span class="time">19:30 — Late</span>
+                    <h3 class="activity-title">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z" />
+                        </svg>
+                        Lựa Chọn Buổi Tối
+                    </h3>
+                    <div style="display: flex; gap: 15px; margin-top: 10px; flex-wrap: wrap;">
+                        <div
+                            style="flex: 1; min-width: 250px; padding: 10px; border-left: 3px solid #e67e22; background: rgba(230,126,34,0.05); border-radius: 4px;">
+                            <strong style="color: #e67e22;">Option 1: Chợ Đêm Đà Lạt</strong>
+                            <p style="font-size: 0.9rem; margin-top: 5px;">Hòa mình vào không khí nhộn nhịp, uống sữa
+                                đậu nành nóng và ăn bánh ngọt.</p>
+                        </div>
+                        <div
+                            style="flex: 1; min-width: 250px; padding: 10px; border-left: 3px solid #0077b6; background: rgba(0,119,182,0.05); border-radius: 4px;">
+                            <strong style="color: #0077b6;">Option 2: Cafe Chill</strong>
+                            <p style="font-size: 0.9rem; margin-top: 5px;">Ghé *Túi Mơ To* hoặc một quán cafe đậm chất
+                                Đà Lạt để ngắm thành phố về đêm.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- THỨ 6 - 01/05 (QUỐC TẾ LAO ĐỘNG) -->
+        <div class="day-section">
+            <h2 class="day-header">Thứ 6, 1 Tháng 5</h2>
+            <div class="timeline">
+
+                <div class="timeline-item" style="animation-delay: 0.1s;">
+                    <span class="time">06:00 — 07:00</span>
+                    <h3 class="activity-title">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path
+                                d="M2,21H20V19H2M20,8H18V5H20M20,3H4V13A4,4 0 0,0 8,17H14A4,4 0 0,0 18,13V10H20A2,2 0 0,0 22,8V5A2,2 0 0,0 20,3Z" />
+                        </svg>
+                        Cafe Chợ Đà Lạt
+                    </h3>
+                    <p class="details">Dậy sớm hít thở không khí se lạnh, uống cafe ngắm cảnh họp chợ (ai dậy được thì
+                        dậy nhé!).</p>
+
+                </div>
+
+                <div class="timeline-item" style="animation-delay: 0.2s;">
+                    <span class="time">07:00 — 07:30</span>
+                    <h3 class="activity-title">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path
+                                d="M11,9H9V2H7V9H5V2H3V9C3,11.12 4.66,12.84 6.75,12.97V22H9.25V12.97C11.34,12.84 13,11.12 13,9V2H11V9Z" />
+                        </svg>
+                        Bữa Sáng: <span class="highlight-food">Bánh Căn</span>
+                    </h3>
+                    <p class="details">Thưởng thức bánh căn nóng hổi bên bếp than hồng (Gợi ý: Bánh Căn Lệ hoặc Nhà
+                        Chung).</p>
+                </div>
+
+                <div class="timeline-item" style="animation-delay: 0.3s;">
+                    <span class="time">07:45 — 10:30</span>
+                    <h3 class="activity-title">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M19,7H11V1H3V7H1V23H23V7H19M5,3H9V7H5V3M3,21V9H9V21H3M11,21V9H21V21H11Z" />
+                        </svg>
+                        Khám Phá Nông Trại
+                    </h3>
+                    <div style="display: flex; gap: 15px; margin-top: 10px; flex-wrap: wrap;">
+                        <div
+                            style="flex: 1; min-width: 250px; padding: 12px; border-left: 3px solid #6a994e; background: rgba(106,153,78,0.05); border-radius: 4px;">
+                            <strong style="color: #6a994e;">Option 1: Puppy Farm</strong>
+                            <p style="font-size: 0.9rem; margin-top: 5px;">Thăm vườn thú, chơi với cún và chụp hình tại
+                                vườn hoa, vườn dâu công nghệ cao.</p>
+                        </div>
+                        <div
+                            style="flex: 1; min-width: 250px; padding: 12px; border-left: 3px solid #bc6c25; background: rgba(188,108,37,0.05); border-radius: 4px;">
+                            <strong style="color: #bc6c25;">Option 2: Mongo Land</strong>
+                            <p style="font-size: 0.9rem; margin-top: 5px;">Không gian thảo nguyên mông cổ, trượt cỏ và
+                                check-in với các loài thú nhỏ siêu cưng.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item" style="animation-delay: 0.4s;">
+                    <span class="time">11:00 — 12:15</span>
+                    <h3 class="activity-title">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path
+                                d="M11,9H9V2H7V9H5V2H3V9C3,11.12 4.66,12.84 6.75,12.97V22H9.25V12.97C11.34,12.84 13,11.12 13,9V2H11V9Z" />
+                        </svg>
+                        Bữa Trưa: <span class="highlight-food">Gà Nướng Cơm Lam</span>
+                    </h3>
+                    <p class="details">Thưởng thức gà nướng tẩm ướp đậm đà ăn kèm cơm lam ống tre thơm phức. (Gợi ý: Gà
+                        nướng Khương Duy hoặc AYUN trên đường từ Farm về).</p>
+                </div>
+
+                <div class="timeline-item" style="animation-delay: 0.5s;">
+                    <span class="time">12:15 — 13:00</span>
+                    <h3 class="activity-title">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path
+                                d="M12,2A10,10 0 1,0 22,12A10,10 0 0,0 12,2M12,20A8,8 0 1,1 20,12A8,8 0 0,1 12,20M13,7H11V11H7V13H11V17H13V13H17V11H13Z" />
+                        </svg>
+                        Ghé mua <span class="highlight-food">Kem Bơ</span>
+                    </h3>
+                    <p class="details">Mua kem bơ béo ngậy (Thanh Thảo, Phụng hoặc Nari) mang về nhà/homestay để cùng
+                        nhau thưởng thức.</p>
+                </div>
+
+                <div class="timeline-item" style="animation-delay: 0.6s;">
+                    <span class="time">13:00 — Afternoon</span>
+                    <h3 class="activity-title">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M19,7H11V1H3V7H1V23H23V7H19M5,3H9V7H5V3M3,21V9H9V21H3M11,21V9H21V21H11Z" />
+                        </svg>
+                        Về Homestay Nghỉ Trưa
+                    </h3>
+                    <p class="details">Về tới "nhà", ăn kem bơ, đánh một giấc trưa thật ngon trước khi tiếp tục hành
+                        trình chiều tối.</p>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>© 2026 Da Lat Trip Itinerary — Thiết kế riêng cho bạn</p>
+        <p style="font-size: 0.8rem; margin-top: 10px;">Đang chờ cập nhật các hoạt động tiếp theo...</p>
+    </footer>
+
+</body>
+
+</html>
