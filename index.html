@@ -167,6 +167,31 @@
             text-shadow: 0 0 1px rgba(0, 119, 182, 0.2);
         }
 
+        .highlight-cafe {
+            border-color: #e74c3c !important;
+            /* Bright Red Border */
+            background: rgba(231, 76, 60, 0.02) !important;
+            box-shadow: 0 4px 20px rgba(231, 76, 60, 0.1) !important;
+        }
+
+        .highlight-cafe:hover {
+            box-shadow: 0 15px 35px rgba(231, 76, 60, 0.2) !important;
+            border-color: #c0392b !important;
+        }
+
+        .highlight-cafe::before {
+            border-color: #e74c3c !important;
+            box-shadow: 0 0 10px #e74c3c !important;
+        }
+
+        .highlight-cafe .activity-title {
+            color: #c0392b;
+        }
+
+        .highlight-cafe .icon {
+            fill: #e74c3c !important;
+        }
+
         .time {
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
@@ -234,6 +259,49 @@
             header {
                 height: 50vh;
             }
+        }
+
+        /* Choice Interaction Styles */
+        .choice-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+
+        .choice-btn {
+            padding: 12px 25px;
+            border-radius: 50px;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .choice-btn:hover {
+            background: rgba(45, 106, 79, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .choice-btn.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 10px 20px rgba(45, 106, 79, 0.2);
+        }
+
+        .choice-content {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .choice-content.active {
+            display: block;
         }
     </style>
 </head>
@@ -310,7 +378,7 @@
 
                 <div class="timeline-item" style="animation-delay: 0.2s;">
                     <span class="time">06:30</span>
-                    <h3 class="activity-title">Check-in Khách Sạn</h3>
+                    <h3 class="activity-title">Nhận Phòng Khách Sạn</h3>
                     <p class="details">Đến khách sạn, gửi vali để bắt đầu hành trình khám phá mà không vướng bận.</p>
                 </div>
 
@@ -360,7 +428,7 @@
 
                 </div>
 
-                <div class="timeline-item" style="animation-delay: 0.7s;">
+                <div class="timeline-item highlight-cafe" style="animation-delay: 0.7s;">
                     <span class="time">09:30 — 11:30</span>
                     <h3 class="activity-title">
                         <svg class="icon" viewBox="0 0 24 24">
@@ -416,39 +484,37 @@
                         <svg class="icon" viewBox="0 0 24 24">
                             <path d="M19,7H11V1H3V7H1V23H23V7H19M5,3H9V7H5V3M3,21V9H9V21H3M11,21V9H21V21H11Z" />
                         </svg>
-                        Check-in & Nghỉ ngơi
+                        Nhận phòng & Nghỉ ngơi
                     </h3>
                     <p class="details">Về khách sạn nhận phòng, sắp xếp đồ đạc và nghỉ ngơi hồi sức.</p>
                 </div>
 
-                <!-- AFTERNOON CHOICE IF EARLY CHECK-IN -->
+                <!-- AFTERNOON CHOICE BASED ON CHECK-IN -->
                 <div class="timeline-item"
                     style="animation-delay: 1.1s; border-left: 3px dashed #bc6c25; background: rgba(188,108,37,0.03);">
-                    <span class="time">15:45 — 17:30</span>
+                    <span class="time">15:30 / 16:15</span>
                     <h3 class="activity-title" style="color: #bc6c25;">
                         <svg class="icon" viewBox="0 0 24 24" style="fill: #bc6c25;">
                             <path d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z" />
                         </svg>
-                        Lựa Chọn Buổi Chiều (Tùy nhận phòng)
+                        Khám Phá Buổi Chiều
                     </h3>
                     <div style="display: flex; gap: 15px; margin-top: 10px; flex-wrap: wrap;">
                         <div
                             style="flex: 1; min-width: 250px; padding: 12px; border-left: 3px solid #bc6c25; background: #fff; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                            <strong style="color: #bc6c25;">Option A: Đường Hầm Điêu Khắc</strong>
-                            <p style="font-size: 0.9rem; margin-top: 5px;">Thích hợp nếu nhận phòng sớm lúc 13h. Nên
-                                xuất phát từ 15h45 để kịp tham quan trước khi đóng cửa.</p>
+                            <strong style="color: #bc6c25;">Phương án 1 (Vào home sớm):</strong>
+                            <p style="font-size: 0.9rem; margin-top: 5px;"><strong>15:30:</strong> Di chuyển đi <span class="highlight-place">Đường Hầm Đất Sét</span>.</p>
                         </div>
                         <div
                             style="flex: 1; min-width: 250px; padding: 12px; border-left: 3px solid #e76f51; background: #fff; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-                            <strong style="color: #e76f51;">Option B: Hái dâu tại vườn</strong>
-                            <p style="font-size: 0.9rem; margin-top: 5px;">Ưu tiên nếu nhận phòng trễ hoặc muốn đi gần
-                                hơn. Nên hái trước 17h15 để còn đủ ánh sáng chụp hình.</p>
+                            <strong style="color: #e76f51;">Phương án 2 (Vào home trễ):</strong>
+                            <p style="font-size: 0.9rem; margin-top: 5px;"><strong>16:15:</strong> Di chuyển đi <span class="highlight-place">Vườn Dâu</span>.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="timeline-item" style="animation-delay: 1.3s;">
-                    <span class="time">18:00 — 19:30</span>
+                <div class="timeline-item" style="animation-delay: 1.2s;">
+                    <span class="time">17:30</span>
                     <h3 class="activity-title">
                         <svg class="icon" viewBox="0 0 24 24">
                             <path
@@ -456,35 +522,38 @@
                         </svg>
                         Bữa tối: <span class="highlight-food">Quán Nướng Chill in Dalat</span>
                     </h3>
-                    <p class="details">Thưởng thức đồ nướng trong không gian chill tại Đà Lạt.</p>
+                    <p class="details">Thưởng thức đồ nướng trong không gian chill.</p>
                     <p class="details" style="font-size: 0.85rem; margin-top: 5px; opacity: 0.7;">📍 Hẻm 1 Đường Đặng
                         Thái Thân, P.3, Đà Lạt</p>
-
                 </div>
 
-                <div class="timeline-item" style="animation-delay: 1.4s;">
-                    <span class="time">19:30 — Late</span>
+                <div class="timeline-item" style="animation-delay: 1.3s;">
+                    <span class="time">19:10</span>
                     <h3 class="activity-title">
                         <svg class="icon" viewBox="0 0 24 24">
                             <path d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z" />
                         </svg>
-                        Lựa Chọn Buổi Tối
+                        Chill tại <span class="highlight-place">Lululola Coffee+</span>
                     </h3>
-                    <div style="display: flex; gap: 15px; margin-top: 10px; flex-wrap: wrap;">
-                        <div
-                            style="flex: 1; min-width: 250px; padding: 10px; border-left: 3px solid #e67e22; background: rgba(230,126,34,0.05); border-radius: 4px;">
-                            <strong style="color: #e67e22;">Option 1: Chợ Đêm Đà Lạt</strong>
-                            <p style="font-size: 0.9rem; margin-top: 5px;">Hòa mình vào không khí nhộn nhịp, uống sữa
-                                đậu nành nóng và ăn bánh ngọt.</p>
-                        </div>
-                        <div
-                            style="flex: 1; min-width: 250px; padding: 10px; border-left: 3px solid #0077b6; background: rgba(0,119,182,0.05); border-radius: 4px;">
-                            <strong style="color: #0077b6;">Option 2: Cafe Chill</strong>
-                            <p style="font-size: 0.9rem; margin-top: 5px;">Ghé *Túi Mơ To* hoặc một quán cafe đậm chất
-                                Đà Lạt để ngắm thành phố về đêm.</p>
-                        </div>
-                    </div>
+                    <p class="details">Ngắm cảnh Đà Lạt về đêm và thưởng thức nhạc acoustic (nếu có show).</p>
+                    <p class="details" style="font-size: 0.85rem; margin-top: 5px; opacity: 0.7;">📍 Địa chỉ: Đường 3/4, Phường 3, Đà Lạt</p>
+                    <p class="details" style="font-size: 0.85rem; margin-top: 5px; opacity: 0.7;">📍 Link Maps: <a
+                            href="https://maps.app.goo.gl/Ax2HtNNeWrWfP1Nx8" target="_blank"
+                            style="color: inherit; text-decoration: underline;">Xem vị trí</a></p>
+                </div>
 
+                <div class="timeline-item" style="animation-delay: 1.4s;">
+                    <span class="time">22:00 — 23:00</span>
+                    <h3 class="activity-title">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.41,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.59,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
+                        </svg>
+                        Kết thúc ngày đầu tiên
+                    </h3>
+                    <p class="details">Về nghỉ ngơi chuẩn bị cho ngày tiếp theo.</p>
+                    <div style="margin-top: 8px; padding: 8px; background: rgba(230,126,34,0.1); border-radius: 8px; border-left: 3px solid #e67e22;">
+                        <p style="font-size: 0.9rem; color: #e67e22;">💡 <strong>Note:</strong> Nếu đói có thể ghé ăn <span class="highlight-food">Bánh tráng nướng</span> dọc đường.</p>
+                    </div>
                 </div>
 
             </div>
@@ -495,7 +564,7 @@
             <h2 class="day-header">Thứ 6, 1 Tháng 5</h2>
             <div class="timeline">
 
-                <div class="timeline-item" style="animation-delay: 0.1s;">
+                <div class="timeline-item highlight-cafe" style="animation-delay: 0.1s;">
                     <span class="time">06:00 — 07:00</span>
                     <h3 class="activity-title">
                         <svg class="icon" viewBox="0 0 24 24">
@@ -633,10 +702,133 @@
                     <p class="details" style="font-size: 0.85rem; opacity: 0.7;">📞 Liên hệ: 0397604601</p>
                 </div>
 
+                <div class="timeline-item" style="animation-delay: 0.9s;">
+                    <span class="time">20:00 — Late</span>
+                    <h3 class="activity-title">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z" />
+                        </svg>
+                        Lựa Chọn Buổi Tối
+                    </h3>
+                    <div style="display: flex; gap: 15px; margin-top: 10px; flex-wrap: wrap;">
+                        <div
+                            style="flex: 1; min-width: 250px; padding: 12px; border-left: 3px solid #e67e22; background: rgba(230,126,34,0.05); border-radius: 4px;">
+                            <strong style="color: #e67e22;">Ưu tiên: Chợ Đêm Đà Lạt</strong>
+                            <p style="font-size: 0.9rem; margin-top: 5px;">Hòa mình vào không khí nhộn nhịp, dạo chơi và mua sắm đồ lưu niệm.</p>
+                        </div>
+                        <div
+                            style="flex: 1; min-width: 250px; padding: 12px; border-left: 3px solid #e74c3c; background: rgba(231,76,60,0.05); border-radius: 4px; border: 1px solid #e74c3c;">
+                            <strong style="color: #e74c3c;">Dự phòng (Nếu chợ quá đông):</strong>
+                            <p style="font-size: 0.9rem; margin-top: 5px;">Ghé <span class="highlight-place">Tiệm Cà Phê Túi Mơ To</span> để tận hưởng không gian yên tĩnh hơn.</p>
+                            <p style="font-size: 0.8rem; margin-top: 5px; opacity: 0.7;">📍 Địa chỉ: Hẻm 31 Sào Nam, Phường 11, Đà Lạt</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- THỨ 7 - 02/05 (NGÀY CUỐI CÙNG) -->
+        <div class="day-section">
+            <h2 class="day-header">Thứ 7, 2 Tháng 5</h2>
+
+            <div class="choice-container">
+                <button class="choice-btn active" onclick="showChoice('healthy')">
+                    Còn khỏe 💪
+                </button>
+                <button class="choice-btn" onclick="showChoice('tired')">
+                    Mệt rồi 😴
+                </button>
+            </div>
+
+            <!-- OPTION: HEALTHY -->
+            <div id="choice-healthy" class="choice-content active">
+                <div class="timeline">
+                    <div class="timeline-item" style="animation-delay: 0.1s;">
+                        <span class="time">05:00</span>
+                        <h3 class="activity-title">Săn mây tại <span class="highlight-place">Đồi Chè Cầu Đất</span></h3>
+                        <p class="details">Dậy thật sớm, hít hà không khí se lạnh và ngắm biển mây bầm bềnh cực phẩm.</p>
+                    </div>
+                    <div class="timeline-item" style="animation-delay: 0.2s;">
+                        <span class="time">08:30 — 10:30</span>
+                        <h3 class="activity-title">Về phòng ngủ bù</h3>
+                        <p class="details">Sau khi thoả mãn với những bức hình săn mây, về lại homestay để nghỉ ngơi hồi sức.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OPTION: TIRED -->
+            <div id="choice-tired" class="choice-content">
+                <div class="timeline">
+                    <div class="timeline-item" style="animation-delay: 0.1s;">
+                        <span class="time">09:30</span>
+                        <h3 class="activity-title">Ngủ nướng (Dậy muộn)</h3>
+                        <p class="details">Tận hưởng giấc ngủ nướng cuối cùng trong cái se se lạnh của Đà Lạt.</p>
+                    </div>
+                    <div class="timeline-item" style="animation-delay: 0.2s;">
+                        <span class="time">10:00 — 11:00</span>
+                        <h3 class="activity-title">Đi mua quà mang về</h3>
+                        <p class="details">Ghé các cửa hàng đặc sản mua mứt, trà hoặc những món quà lưu niệm cho người thân.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SHARED AFTERNOON ACTIVITIES -->
+            <div class="timeline">
+                <div class="timeline-item" style="animation-delay: 0.3s;">
+                    <span class="time">11:00 — 11:30</span>
+                    <h3 class="activity-title">Soạn đồ & Trả phòng</h3>
+                    <p class="details">Kiểm tra lại hành lý lần cuối, làm thủ tục check-out khách sạn.</p>
+                </div>
+
+                <div class="timeline-item" style="animation-delay: 0.4s;">
+                    <span class="time">12:00 — 13:30</span>
+                    <h3 class="activity-title">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M11,9H9V2H7V9H5V2H3V9C3,11.12 4.66,12.84 6.75,12.97V22H9.25V12.97C11.34,12.84 13,11.12 13,9V2H11V9Z" />
+                        </svg>
+                        Bữa Trưa Cuối: <span class="highlight-food">Cơm Niêu / Bún bò thố đá</span>
+                    </h3>
+                    <div style="margin-top: 10px; font-size: 0.9rem;">
+                        <p>📍 <strong>Cơm Niêu:</strong> <a href="https://maps.app.goo.gl/TT26UbsGDXbpyd4H9" target="_blank" style="color: #2d6a4f; text-decoration: underline;">Cơm Niêu Như Ngọc</a></p>
+                        <p style="margin-top: 5px;">📍 <strong>Bún bò thố đá:</strong> <a href="https://maps.app.goo.gl/L7XwVN7Y6L3bo4Ti7" target="_blank" style="color: #666; text-decoration: underline;">Bún bò thố đá Sông Hương</a></p>
+                    </div>
+                </div>
+
+                <div class="timeline-item highlight-cafe" style="animation-delay: 0.5s;">
+                    <span class="time">13:30 — 15:00</span>
+                    <h3 class="activity-title">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M12,2A10,10 0 1,0 22,12A10,10 0 0,0 12,2M12,20A8,8 0 1,1 20,12A8,8 0 0,1 12,20M13,7H11V11H7V13H11V17H13V13H17V11H13Z" />
+                        </svg>
+                        Cafe Chill Đợi Xe
+                    </h3>
+                    <p class="details">Ghé một quán cafe nhẹ nhàng, lướt điện thoại xem lại hình ảnh chuyến đi trước khi ra xe về.</p>
+                    <div style="margin-top: 8px; padding: 10px; background: rgba(231, 76, 60, 0.1); border-radius: 8px; border-left: 4px solid #e74c3c;">
+                        <p style="font-size: 0.9rem; color: #c0392b; font-weight: 600;">⚠️ Lưu ý quan trọng:</p>
+                        <p style="font-size: 0.9rem; color: #c0392b;">15:00 xe chạy, vui lòng có mặt tại nhà xe lúc <strong>14:30</strong>.</p>
+                    </div>
+                </div>
             </div>
         </div>
 
     </main>
+
+    <script>
+        function showChoice(choice) {
+            // Update buttons
+            document.querySelectorAll('.choice-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+
+            // Update content sections
+            document.querySelectorAll('.choice-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById('choice-' + choice).classList.add('active');
+        }
+    </script>
 
     <footer>
         <p>© 2026 Da Lat Trip Itinerary — Thiết kế riêng cho bạn</p>
